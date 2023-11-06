@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Mobile Software Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<main role="main" class="py-5 flex-fill">
+    <div class="container">
+        <h1 class="sub-title">New application</h1>
+        <h4 class="sub-title ui-state-error-text" style="color: red;" th:text="${errorMessage}"></h4>
+        <form method="post" action="#" th:action="@{/application/upload}" enctype="multipart/form-data"
+              class="row mb-3 col-md-8 col-sm-8">
+            <div class="row mb-3 col-md-6 col-sm-6">
+                <input id="name" name="name" th:name="name" class="form-control my-1" type="text"
+                       placeholder="Application name" aria-label="Application name" required>
+                <select class="form-control my-1" id="categoryId" name="categoryId" required>
+                    <option value="0">Application category</option>
+                    <option th:each="category : ${categories}" th:value="${category.getId()}"
+                            th:text="${category.getName()}"></option>
+                </select>
+                <textarea class="form-control my-1" id="description" rows="3" name="description" required></textarea>
+                <input class="form-control my-2" type="file" name="file" id="file" required>
+                <button id="confirm_button_upload" type="submit" class="btn btn-secondary px-3" disabled="true">Upload
+                </button>
+                <button type="reset" value="Reset" class="btn btn-danger my-2">Cancel</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-3.7.0.slim.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#name, #category, #description, #file').change(function () {
+            if ($("#name").val().length && $("#description").val().length
+                && ($("#category option:selected").val() !== '0') && ($("#file").val())) {
+                $("#confirm_button_upload").prop('disabled', false);
+            } else {
+                $("#confirm_button_upload").prop('disabled', true);
+            }
+        });
+    });
+</script>
+</html>
