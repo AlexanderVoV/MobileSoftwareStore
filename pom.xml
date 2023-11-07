@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0-M3</version>
+        <version>3.1.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alexandervov</groupId>
@@ -78,12 +78,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <repository>
-        <id>com.springsource.repository.bundles.external</id>
-        <name>SpringSource Enterprise Bundle Repository - External Releases</name>
-        <url>https://repo.spring.io/milestone/</url>
-    </repository>
 
     <build>
         <plugins>
